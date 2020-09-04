@@ -1,31 +1,31 @@
 vagrant-oracle-database-xe-18c
 ==============================
 
-Vagrant + Oracle Linux 7 + Oracle Database 18c XE の簡易セットアップ。
+Vagrant + Oracle Linux 7 + Oracle Database 18c XE 
 
-ダウンロード
+Download
 ------------
 
-Oracle Database 18c XEのソフトウェアを[Oracle Technology Network](https://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html)からダウンロードし、Vagrantfileと同じディレクトリに配置。
+Download Oracle Database 18c XE rpm from [Oracle Technology Network](https://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html) and put the file into de same folder of Vagrantfile is
 
 * oracle-database-xe-18c-1.0-1.x86_64.rpm
 
-カスタマイズ
+Customization
 ------------
 
-`dotenv.sample`というファイルを`.env`という名前のファイルにコピーし、必要に応じて内容を書き換える。
+`dotenv.sample`to the file named `.env` and rewrite the contents if necessary.
 
 ```
 # SYS, SYSTEM and PDBADMIN password
 ORACLE_PASSWORD=oracle
 ```
 
-Vagrant設定
+Vagrant proxy
 -----------
 
-プロキシを利用する必要がある場合、まずvagrant-proxyconfをインストールし、vagrant-proxyconf用の環境変数を設定しておく。
+If you need to use a proxy, first install vagrant-proxyconf and set the environment variables for vagrant-proxyconf.
 
-### ホストがmacOS or Linuxの場合 ###
+### If your host is macOS or Linux ###
 
 ```
 export http_proxy=http://proxy.example.com:80
@@ -38,7 +38,7 @@ export VAGRANT_FTP_PROXY=http://proxy.example.com:80
 export VAGRANT_NO_PROXY=localhost,127.0.0.1
 ```
 
-### ホストがWindowsの場合 ###
+### If your host is Windows ###
 
 ```
 SET http_proxy=http://proxy.example.com:80
@@ -51,16 +51,16 @@ SET VAGRANT_FTP_PROXY=http://proxy.example.com:80
 SET VAGRANT_NO_PROXY=localhost,127.0.0.1
 ```
 
-セットアップ
+setup
 ------------
 
-`vagrant up`を実行すると、内部的に以下が動く。
+The following works internally when you run `vagrant up`
 
-* Oracle Linux 7のダウンロードと起動
-* Oracle Database 18c XEのインストール
-* データベースの作成
-* 環境変数の設定
-* 自動起動の設定
+* Download and Launch Oracle Linux 7
+* Installation of Oracle Database 18c XE
+* Database Creation
+* Setting Environment Variables
+* Automatic Launch Settings
 
 ```
 C:\vagrant-oracle-database-xe-18c>vagrant up
@@ -75,7 +75,7 @@ Bringing machine 'default' up with 'virtualbox' provider...
     default: Downloading: https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box
 ...
 ...
-(ネットワークやサーバーのスペックによっては数十分かかります。)
+(Depending on your network and server specs, this could take tens of minutes.)
 ...
 ...
     default: Database creation complete. For details check the logfiles at:
@@ -94,19 +94,16 @@ Bringing machine 'default' up with 'virtualbox' provider...
 C:\vagrant-oracle-database-xe-18c>
 ```
 
-動作確認(ブラウザ編)
+Operation check (browser version)
 --------------------
 
-ブラウザで https://localhost:5500/em にアクセスし、Enterprise Manager Expressへログイン。
+Go to https://localhost:5500/em in your browser and log in to Enterprise Manager Express. (require Adobe FLASH X| )
 
-![ログイン画面](localhost_5500_em_login.png)
 
-![管理画面](localhost_5500_em_shell.png)
-
-動作確認(ターミナル編)
+Confirmation of operation(Terminal)
 ----------------------
 
-ゲストOSに接続する。
+Connecting to a Guest OS
 
 ```
 C:\vagrant-oracle-database-xe-18c>vagrant ssh
@@ -125,7 +122,7 @@ For additional packages, updates, documentation and community help, see:
 [vagrant@localhost ~]$
 ```
 
-ルートに接続する。
+Connect to the root.
 
 ```
 [vagrant@localhost ~]$ sqlplus system/oracle
@@ -152,7 +149,7 @@ Version 18.4.0.0.0
 [vagrant@localhost ~]$
 ```
 
-PDBに接続し、サンプル表を確認する。
+Connect to the PDB and check the sample table.
 
 ```
 [vagrant@localhost ~]$ sqlplus system/oracle@localhost/xepdb1
